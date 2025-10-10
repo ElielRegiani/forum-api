@@ -2,6 +2,7 @@ package br.com.forum_api.forum_api.controller
 
 import br.com.forum_api.forum_api.dto.AtualizacaoTopicoForm
 import br.com.forum_api.forum_api.dto.NovoTopicoForm
+import br.com.forum_api.forum_api.dto.TopicoPorCategoriaDTO
 import br.com.forum_api.forum_api.dto.TopicoView
 import br.com.forum_api.forum_api.service.TopicoService
 import jakarta.validation.Valid
@@ -68,5 +69,10 @@ class TopicoController(private val topicoService: TopicoService) {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     fun deletar(@PathVariable id: Long) {
         topicoService.deletar(id)
+    }
+
+    @GetMapping("/relatorio")
+    fun relatorio(): List<TopicoPorCategoriaDTO> {
+        return topicoService.relatorio()
     }
 }
