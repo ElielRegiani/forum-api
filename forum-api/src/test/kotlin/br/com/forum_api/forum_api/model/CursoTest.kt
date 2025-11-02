@@ -1,5 +1,9 @@
 package br.com.forum_api.forum_api.model
 
-class CursoTest {
-
+object CursoTest {
+    fun build() = Curso(
+        id = 1,
+        nome = "Kotlin Basico",
+        categoria = "Categoria",
+    )
 }

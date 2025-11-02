@@ -37,10 +37,15 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
+
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
+	testImplementation(platform("org.testcontainers:testcontainers-bom:2.0.1"))
+	testImplementation("org.testcontainers:mysql")
+	testImplementation("org.testcontainers:junit-jupiter")
 	testImplementation("io.mockk:mockk:1.14.6")
+	testImplementation("org.springframework.security:spring-security-test:6.5.6")
 	testImplementation("org.assertj:assertj-core:3.27.6")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
