@@ -6,8 +6,6 @@ import br.com.forum_api.forum_api.dto.TopicoPorCategoriaDTO
 import br.com.forum_api.forum_api.dto.TopicoView
 import br.com.forum_api.forum_api.service.TopicoService
 import jakarta.validation.Valid
-import org.springframework.cache.annotation.CacheEvict
-import org.springframework.cache.annotation.Cacheable
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.http.HttpStatus
@@ -30,7 +28,6 @@ import org.springframework.web.util.UriComponentsBuilder
 class TopicoController(private val topicoService: TopicoService) {
 
     @GetMapping
-    @Cacheable("topicos")
     fun listar(
         @RequestParam(required = false) nomeCurso: String?,
         paginacao: Pageable
@@ -45,7 +42,6 @@ class TopicoController(private val topicoService: TopicoService) {
 
     @PostMapping
     @Transactional
-    @CacheEvict(value = ["topicos"], allEntries = true)
     fun cadastrar(
         @RequestBody @Valid form: NovoTopicoForm,
         uriBuilder: UriComponentsBuilder
@@ -57,7 +53,6 @@ class TopicoController(private val topicoService: TopicoService) {
 
     @PutMapping
     @Transactional
-    @CacheEvict(value = ["topicos"], allEntries = true)
     fun atualizar(@RequestBody @Valid form: AtualizacaoTopicoForm): ResponseEntity<TopicoView> {
         val topicoView = topicoService.atualizar(form)
         return ResponseEntity.ok(topicoView)
@@ -65,7 +60,6 @@ class TopicoController(private val topicoService: TopicoService) {
 
     @DeleteMapping("/{id}")
     @Transactional
-    @CacheEvict(value = ["topicos"], allEntries = true)
     @ResponseStatus(HttpStatus.NO_CONTENT)
     fun deletar(@PathVariable id: Long) {
         topicoService.deletar(id)
